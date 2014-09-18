@@ -1,4 +1,4 @@
-#include "DataStructures/AdjacencyList.h"
+#include "../DataStructures/AdjacencyList.h"
 
 void BreadthFirstSearch (AdjacencyList);
 

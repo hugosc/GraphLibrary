@@ -108,10 +108,14 @@ template <class T> void node<T>::deleteEdge (int endp) {
 }
 
 template <class T> int node<T>::neighbour (int i) {
+    if (curr_index > i) {
+        curr = adj_list;
+        curr_index = 0;
+    }
+
     while (curr_index < i && curr != NULL) {
         curr = curr->next;
         curr_index++;
-        std::cout << curr->key << " : " << curr_index << std::endl;
     }
 
     if (curr != NULL) {
@@ -126,6 +130,11 @@ template <class T> int node<T>::neighbour (int i) {
 }
 
 template <class T> int node<T>::edge_weight (int i) {
+    if (curr_index > i) {
+        curr = adj_list;
+        curr_index = 0;
+    }
+
     while (curr_index < i && curr != NULL) {
         curr = curr->next;
         curr_index++;
@@ -151,7 +160,7 @@ template <class T> class Graph {
         void deleteEdge (int, int);
         int n_vertices (void);
         int n_edges (void);
-        node<T> node_at (int);
+        node<T>& node_at (int);
     private :
         int nv;
         int ne;
@@ -205,7 +214,7 @@ template <class T> int Graph<T>::n_edges () {
     return ne;
 }
 
-template <class T> node<T> Graph<T>::node_at (int index) {
+template <class T> node<T>& Graph<T>::node_at (int index) {
     if (index >= 0 && index <= v_list.size())
         return v_list[index];
     else { std::cerr << "index out of bounds.\n"; }

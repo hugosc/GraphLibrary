@@ -28,7 +28,7 @@ template <class T> class node {
          void deleteEdge (int);
          int neighbour(int);
          int edge_weight(int);
-         void operator= (const node&);
+         node<T>& operator= (const node&);
 
          int color;
          node<T>* parent;
@@ -41,12 +41,13 @@ template <class T> class node {
         int curr_index;
 };
 
-template <class T> void node<T>::operator= (const node& v) {
+template <class T> node<T>& node<T>::operator= (const node& v) {
     color = v.color;
     parent = v.parent;
     degree = v.degree;
     info = v.info;
     adj_list = v.adj_list;
+    return *this;
 }
 
 template <class T> node<T>::node (T data, node* prt, int clr) {
